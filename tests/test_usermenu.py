@@ -5,7 +5,7 @@ from tests.conftest import init_driver
 
 from config.testdata import testdata
 
-@pytest.mark.usefixtures("init_driver")
+@pytest.mark.usefixtures("init_driver" , "log_on_failure")
 class Test_usermenu():
 
     def test_Usermenu(self):

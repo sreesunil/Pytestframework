@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-
+from selenium import webdriver
 from config.testdata import testdata
 from pages.BasePage import BasePage
 
@@ -12,7 +12,7 @@ class usermenuPage(BasePage):
     IFRAME = (By.ID , "contactInfoContentId")
     LAST_NAME = (By.ID , "lastName")
     SAVE_BUTTON = (By.XPATH , "//input[@value = 'Save All']")
-    POST_TAB = (By.ID , "publisherAttachTextPost")
+    POST_TAB = (By.XPATH, "(//span[@class='publisherattachtext '])[1]")
     POST_IFRAME = (By.XPATH ,"//iframe[contains(@title,'Rich Text Editor, publisherRichTextEditor')]")
     POST_BODY = (By.XPATH , "//html[1]/body[1]")
 
@@ -29,9 +29,11 @@ class usermenuPage(BasePage):
         self.do_clear(self.LAST_NAME)
         self.do_send_keys(self.LAST_NAME,"Sunil")
         self.do_click(self.SAVE_BUTTON)
+        driver.switch_to.parent_frame()
         self.do_click(self.POST_TAB)
-        #driver.switch_to.frame(self.POSTIFRAME)
-        #self.do_click(self.POST_TAB)
+        driver.switch_to.frame(0)
+        self.do_send_keys(self.POST_BODY , "Hello There")
+
 
 
 
